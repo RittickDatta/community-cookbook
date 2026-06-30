@@ -3,7 +3,9 @@ import Link from 'next/link';
 export default function Header() {
   return (
     <header className="header">
-      <h1 className="logo">Cookbook Community</h1>
+      <h1 className="logo">
+        <Link href="/">Cookbook Community</Link>
+      </h1>
       <nav className="nav">
         <ul className="nav__list">
           <li className="nav__item">
