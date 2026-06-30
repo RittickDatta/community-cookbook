@@ -101,3 +101,41 @@ footer {
   justify-content: center;
   align-items: center;
 }
+
+/* Form */
+.form-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+form {
+  width: 60%;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: lighter;
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 0.7rem 1rem;
+  outline: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.form-field select {
+  padding: 1rem;
+  outline: 1px solid lightgray;
+  border-radius: 5px;
+}
