@@ -1,7 +1,7 @@
 export default function LoadingRecipes() {
-    return (
-        <div className="loading-recipes">
-            <p>Loading recipes...</p>
-        </div>
-    );
+  return (
+    <div className="loading-recipes w-full h-full flex items-center justify-center">
+      <p>Loading recipes...</p>
+    </div>
+  );
 }
