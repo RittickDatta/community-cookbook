@@ -1,4 +1,5 @@
 'use client';
+import FilterBar from '@/components/filter-bar/FilterBar';
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import MainContent from '@/components/main-content/MainContent';
@@ -24,7 +25,10 @@ export default function ViewRecipes() {
           <h1 className="w-full flex justify-center text-2xl mb-4">
             All Recipes
           </h1>
-          <div className="recipe-cards">{recipeCards}</div>
+          <div className="w-full flex justify-center">
+            <div><FilterBar /></div>
+            <div className="recipe-cards">{recipeCards}</div>
+          </div>
         </main>
       </MainContent>
       <Footer />
