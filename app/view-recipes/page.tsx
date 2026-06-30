@@ -20,7 +20,7 @@ export default function ViewRecipes() {
     <>
       <Header />
       <MainContent>
-        <main>
+        <main className="pb-16">
           <h1 className="w-full flex justify-center text-2xl mb-4">
             All Recipes
           </h1>
