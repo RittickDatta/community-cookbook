@@ -13,15 +13,23 @@ export default function AddRecipe() {
     'Continental',
   ]);
 
-  const handleAdd = (e) => {
+  const handleAdd = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.target as unknown as HTMLFormElement);
 
     const payload = Object.fromEntries(formData)
 
     console.log('Payload', payload);
 
     // TODO:Reset form after API call
+    const response = await fetch('/api/recipes', {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    });
+
+    console.log('Response', response);
+
   };
 
   return (
