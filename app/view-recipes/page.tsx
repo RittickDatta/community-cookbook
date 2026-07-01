@@ -4,11 +4,24 @@ import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import MainContent from '@/components/main-content/MainContent';
 import RecipeCard from '@/components/recipe-card/recipe-card';
-import { mockRecipes } from '@/mock/data';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ViewRecipes() {
-  const [recipes, setRecipes] = useState(mockRecipes); // Replace with your actual recipe data
+  const [recipes, setRecipes] = useState([]); // Replace with your actual recipe data
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch('/api/recipes');
+        const data = await response.json();
+        setRecipes(data);
+      } catch (error) {
+        console.error('Error fetching recipes:', error);
+      }
+    };
+
+    fetchRecipes();
+  }, []); 
 
   const recipeCards = recipes.map((recipe) => (
     <RecipeCard

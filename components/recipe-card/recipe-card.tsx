@@ -1,6 +1,6 @@
 import { Recipe } from '@/models/recipe';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function RecipeCard({ recipie }: { recipie: Recipe }) {
   const {
@@ -16,8 +16,8 @@ export default function RecipeCard({ recipie }: { recipie: Recipe }) {
 
   return (
     <div className="recipe-card">
-      <img
-        src={image}
+      <Image 
+        src={image.src}
         alt={title}
         width={300}
         height={200}
