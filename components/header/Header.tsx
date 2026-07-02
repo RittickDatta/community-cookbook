@@ -1,6 +1,10 @@
+"use client";
+import { ThemeContext } from '@/store/theme-context';
 import Link from 'next/link';
+import { useContext } from 'react';
 
 export default function Header() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <header className="header">
       <h1 className="logo">
@@ -19,6 +23,11 @@ export default function Header() {
           </li>
           <li className="nav__item">
             <Link href="/register">Sign Up</Link>
+          </li>
+          <li className="nav__item">
+            <button className="theme-toggle-button" onClick={toggleTheme}>
+              Toggle Theme
+            </button>
           </li>
         </ul>
       </nav>

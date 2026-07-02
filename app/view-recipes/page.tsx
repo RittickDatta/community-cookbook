@@ -7,7 +7,7 @@ import RecipeCard from '@/components/recipe-card/recipe-card';
 import { useEffect, useState } from 'react';
 
 export default function ViewRecipes() {
-  const [recipes, setRecipes] = useState([]); // Replace with your actual recipe data
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {
