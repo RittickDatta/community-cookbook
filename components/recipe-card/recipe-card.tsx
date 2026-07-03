@@ -2,7 +2,13 @@ import { Recipe } from '@/models/recipe';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function RecipeCard({ recipie }: { recipie: Recipe }) {
+type Props = {
+  recipie: Recipe;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
+};
+
+export default function RecipeCard({ recipie, onEdit, onDelete }: Props) {
   const {
     title,
     description,
@@ -16,7 +22,7 @@ export default function RecipeCard({ recipie }: { recipie: Recipe }) {
 
   return (
     <div className="recipe-card">
-      <Image 
+      <Image
         src={image.src}
         alt={title}
         width={300}
@@ -34,6 +40,12 @@ export default function RecipeCard({ recipie }: { recipie: Recipe }) {
             View Recipe
           </button>
         </Link>
+          <button className="border border-1 p-1 rounded hover:cursor-pointer" onClick={() => onEdit(recipie.id)}>
+            Edit Recipe
+          </button>
+          <button className="border border-1 p-1 rounded hover:cursor-pointer" onClick={() => onDelete(recipie.id)}>
+            Delete Recipe
+          </button>
       </div>
     </div>
   );

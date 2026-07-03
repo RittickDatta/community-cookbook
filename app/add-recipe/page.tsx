@@ -4,6 +4,7 @@ import Header from '@/components/header/Header';
 import MainContent from '@/components/main-content/MainContent';
 import { DIFFICULTY } from '@/constants/constants';
 import { useState, type FormEvent } from 'react';
+import { redirect } from 'next/navigation';
 
 export default function AddRecipe() {
   const [category, setCategory] = useState<string[]>([
@@ -30,6 +31,9 @@ export default function AddRecipe() {
 
     console.log('Response', response);
 
+    if (response.ok) {
+      redirect('/view-recipes');
+    }
   };
 
   return (
