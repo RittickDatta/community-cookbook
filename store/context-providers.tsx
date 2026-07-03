@@ -1,10 +1,15 @@
-"use client";
-import { ThemeContextProvider } from "./theme-context";
+'use client';
+import { AuthContextProvider } from './auth-context';
+import { ThemeContextProvider } from './theme-context';
 
-export default function ContextProviders({ children }: { children: React.ReactNode }) {
+export default function ContextProviders({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <ThemeContextProvider>
-      {children}
+      <AuthContextProvider>{children}</AuthContextProvider>
     </ThemeContextProvider>
   );
 }
