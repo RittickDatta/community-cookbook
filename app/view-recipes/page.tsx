@@ -95,7 +95,7 @@ export default function ViewRecipes() {
                 <NoDataPanel
                   message="No recipes found."
                   ActionBtn={
-                    <button className="outline text-white font-bold py-2 px-4 rounded">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                       <Link href="/add-recipe">Add Recipe</Link>
                     </button>
                   }
