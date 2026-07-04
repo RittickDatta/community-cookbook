@@ -3,8 +3,9 @@ import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import MainContent from '@/components/main-content/MainContent';
 import { DIFFICULTY } from '@/constants/constants';
-import { useState, type FormEvent } from 'react';
+import { useContext, useState, type FormEvent } from 'react';
 import { redirect } from 'next/navigation';
+import { NotificationContext } from '@/store/notification-context';
 
 export default function AddRecipe() {
   const [category, setCategory] = useState<string[]>([
@@ -13,27 +14,33 @@ export default function AddRecipe() {
     'Asian',
     'Continental',
   ]);
+  const { setNotification } = useContext(NotificationContext);
 
   const handleAdd = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as unknown as HTMLFormElement);
 
-    const payload = Object.fromEntries(formData)
+    const payload = Object.fromEntries(formData);
 
     console.log('Payload', payload);
 
-    // TODO:Reset form after API call
+    setNotification({ message: 'Adding recipe...', status: 'info' });
     const response = await fetch('/api/recipes', {
       method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(payload)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
     });
 
-    console.log('Response', response);
-
-    if (response.ok) {
-      redirect('/view-recipes');
+    if (!response.ok) {
+      setNotification({ message: 'Error adding recipe.', status: 'error' });
     }
+    
+    setNotification({
+      message: 'Recipe added successfully!',
+      status: 'success',
+    });
+    redirect('/view-recipes');
+    // TODO:Reset form after API call
   };
 
   return (

@@ -1,5 +1,6 @@
 'use client';
 import { AuthContextProvider } from './auth-context';
+import { NotificationProvider } from './notification-context';
 import { ThemeContextProvider } from './theme-context';
 
 export default function ContextProviders({
@@ -9,7 +10,11 @@ export default function ContextProviders({
 }) {
   return (
     <ThemeContextProvider>
-      <AuthContextProvider>{children}</AuthContextProvider>
+      <AuthContextProvider>
+        <NotificationProvider>
+        {children}
+        </NotificationProvider>
+      </AuthContextProvider>
     </ThemeContextProvider>
   );
 }
