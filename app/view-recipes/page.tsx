@@ -8,6 +8,8 @@ import { useContext, useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { NotificationContext } from '@/store/notification-context';
+import NoDataPanel from '@/components/no-data-panel/NoDataPanel';
+import Link from 'next/link';
 
 export default function ViewRecipes() {
   const [recipes, setRecipes] = useState([]);
@@ -21,7 +23,10 @@ export default function ViewRecipes() {
         const response = await fetch('/api/recipes');
         const data = await response.json();
         setRecipes(data);
-        setNotification({ message: 'Recipes loaded successfully!', status: 'success' });
+        setNotification({
+          message: 'Recipes loaded successfully!',
+          status: 'success',
+        });
       } catch (error) {
         console.error('Error fetching recipes:', error);
         setNotification({ message: 'Error loading recipes.', status: 'error' });
@@ -29,12 +34,12 @@ export default function ViewRecipes() {
     };
 
     fetchRecipes();
-  }, []); 
+  }, []);
 
   const handleEdit = (id: number) => {
     console.log(`Edit recipe with ID: ${id}`);
     redirect(`/edit-recipe/${id}`);
-  }
+  };
 
   const handleDelete = (id: number) => {
     console.log(`Delete recipe with ID: ${id}`);
@@ -46,16 +51,21 @@ export default function ViewRecipes() {
         });
         const data = await response.json();
         console.log('Deleted recipe:', data);
-        setNotification({ message: 'Recipe deleted successfully!', status: 'success' });
+        setNotification({
+          message: 'Recipe deleted successfully!',
+          status: 'success',
+        });
       } catch (error) {
         console.error('Error deleting recipe:', error);
         setNotification({ message: 'Error deleting recipe.', status: 'error' });
       }
     };
     deleteRecipe();
-    setRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe.id !== id));
+    setRecipes((prevRecipes) =>
+      prevRecipes.filter((recipe) => recipe.id !== id),
+    );
     router.refresh();
-  }
+  };
 
   const recipeCards = recipes.map((recipe) => (
     <RecipeCard
@@ -75,8 +85,23 @@ export default function ViewRecipes() {
             All Recipes
           </h1>
           <div className="w-full flex justify-center">
-            <div><FilterBar /></div>
-            <div className="recipe-cards">{recipeCards}</div>
+            <div>
+              <FilterBar />
+            </div>
+            <div className="recipe-cards">
+              {recipeCards.length > 0 ? (
+                recipeCards
+              ) : (
+                <NoDataPanel
+                  message="No recipes found."
+                  ActionBtn={
+                    <button className="outline text-white font-bold py-2 px-4 rounded">
+                      <Link href="/add-recipe">Add Recipe</Link>
+                    </button>
+                  }
+                />
+              )}
+            </div>
           </div>
         </main>
       </MainContent>
