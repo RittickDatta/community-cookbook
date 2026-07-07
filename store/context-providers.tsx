@@ -1,5 +1,6 @@
 'use client';
 import { AuthContextProvider } from './auth-context';
+import { FilterContextProvider } from './filter-context';
 import { NotificationProvider } from './notification-context';
 import { ThemeContextProvider } from './theme-context';
 
@@ -12,7 +13,7 @@ export default function ContextProviders({
     <ThemeContextProvider>
       <AuthContextProvider>
         <NotificationProvider>
-        {children}
+          <FilterContextProvider>{children}</FilterContextProvider>
         </NotificationProvider>
       </AuthContextProvider>
     </ThemeContextProvider>
